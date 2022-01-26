@@ -6,13 +6,15 @@ module.exports.run = async (client, message, args) => {
 	let rolls;
 	let dice;
 
-	// captura a string passada como argumento
-	args = Array.from(args[0]);
+	// captura as string passadas como argumento
+	let arr = Array.from(args.shift());
+	let description = args.join(" ");
 
 	// identifica a quantidade de rolagens a ser feita
-	quantity = defineQuantity(args, args.indexOf('d'));
+	quantity = defineQuantity(arr, arr.indexOf('d'));
+
 	// identifica o tipo de dado a ser rolado
-	dice = defineDice(args, args.indexOf('d'));
+	dice = defineDice(arr, arr.indexOf('d'));
 
 	// rola os dados de acordo com quantidade e tipo
 	rolls = randomize(quantity, dice);
@@ -25,17 +27,36 @@ module.exports.run = async (client, message, args) => {
 	});
 
 	// soma o total dos valores rolados
-	let total = addNumbers(rolls);
+	let total = calculateTotal(rolls);
 	// captura o maior valor para exibir separadamente
 	let best = rolls.shift();
 
 	//cria a embed que exibe as informações
-	embed = new Discord.MessageEmbed()
-		.setColor('#9B59B6')
-		.setDescription(`[**${best}**, ${rolls.join(", ")}] -> __${total}__`);
+	if (rolls.length == 0) {
+		embed = configUnicEmbed(best);
+	} else {
+		embed = configMultEmbed(rolls, best, total);
+	}
 
 	// envia a embed como mensagem
 	message.lineReply(embed);
+}
+
+/* =-=-= FUNCTIONS =-=-= */
+
+// cria uma embed que exibir um único valor
+function configUnicEmbed(value, title = '') {
+	return new Discord.MessageEmbed()
+		.setColor('#9B59B6')
+		.setTitle(title)
+		.setDescription(`[**${value}**]`);
+}
+
+// cria uma embed que exibe multiplos valores
+function configMultEmbed(arr, value, total) {
+		return new Discord.MessageEmbed()
+			.setColor('#9B59B6')
+			.setDescription(`[**${value}**, ${arr.join(", ")}] -> ${total}`);
 }
 
 // captura a quantidade de rolagens
@@ -79,7 +100,7 @@ function randomize(quant, max) {
 }
 
 // soma os numeros de um vetor
-function addNumbers(arr) {
+function calculateTotal(arr) {
 	let result = new Number();
 	for (let a of arr) {
 		result += a;
