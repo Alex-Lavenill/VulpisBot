@@ -14,11 +14,10 @@ Criando um bot simples para Discord.
 <br>
 <code>$calc &lt;cálculo&gt;</code><br>
 <em>Resolve cálculos matemáticos.<br>
-Operadores: 
-<ul>
-  <li>Adição <b>( + )</b>; 
-  <li>Subtração <b>( - )</b>;
-  <li>Divisão <b>( / )</b>;
-  <li>Múltiplicação <b>( * )</b>
-  <li>Potenciação <b>( ^ )</b>.
-</ul></em>
+<u>Operadores:</u><br>
+  <code>&nbsp;+&nbsp;</code> Adição<br>
+  <code>&nbsp;-&nbsp;</code> Subtração<br>
+  <code>&nbsp;/&nbsp;</code> Divisão<br>
+  <code>&nbsp;*&nbsp;</code> Múltiplicação<br>
+  <code>&nbsp;^&nbsp;</code> Potenciação<br>
+</em>
