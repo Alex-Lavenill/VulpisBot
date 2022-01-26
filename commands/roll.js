@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args) => {
 
 	// captura as string passadas como argumento
 	let arr = Array.from(args.shift());
-	let description = args.join(" ");
+	let phrase = args.join(" ");
 
 	// identifica a quantidade de rolagens a ser feita
 	quantity = defineQuantity(arr, arr.indexOf('d'));
@@ -33,9 +33,9 @@ module.exports.run = async (client, message, args) => {
 
 	//cria a embed que exibe as informações
 	if (rolls.length == 0) {
-		embed = configUnicEmbed(best);
+		embed = configUnicEmbed(best, arr, phrase);
 	} else {
-		embed = configMultEmbed(rolls, best, total);
+		embed = configMultEmbed(rolls, best, total, arr, phrase);
 	}
 
 	// envia a embed como mensagem
@@ -45,18 +45,24 @@ module.exports.run = async (client, message, args) => {
 /* =-=-= FUNCTIONS =-=-= */
 
 // cria uma embed que exibir um único valor
-function configUnicEmbed(value, title = '') {
+function configUnicEmbed(value, dice, title = '') {
 	return new Discord.MessageEmbed()
 		.setColor('#9B59B6')
 		.setTitle(title)
-		.setDescription(`[**${value}**]`);
+		.addField(
+			`${dice.join('').toLowerCase()} Result: `,
+			`[${value}]`);
 }
 
 // cria uma embed que exibe multiplos valores
-function configMultEmbed(arr, value, total) {
+function configMultEmbed(arr, value, total, dice, title = '') {
 		return new Discord.MessageEmbed()
 			.setColor('#9B59B6')
-			.setDescription(`[**${value}**, ${arr.join(", ")}] -> ${total}`);
+			.setTitle(title)
+			.addField(
+				`${dice.join('').toLowerCase()} Result: `, 
+				`[**${value}**, ${arr.join(", ")}] => ${total}`
+			);
 }
 
 // captura a quantidade de rolagens
