@@ -10,11 +10,35 @@ module.exports.run = async (client, message, args) => {
 	let arr = Array.from(args.shift());
 	let phrase = args.join(" ");
 
+	
+	
+	
+	
+	// identifica soma
+
+
+
+
+	console.log('arr ', arr);
+	if (arr.includes('+')) {
+		let plus = arr.slice(-( arr.length - arr.indexOf('+') )-1);
+		// plus = plus.shift();
+		console.log(plus);
+	}
+	console.log('arr ', arr);
+
+
+
+
+
+
+
 	// identifica a quantidade de rolagens a ser feita
 	quantity = defineQuantity(arr, arr.indexOf('d'));
 
 	// identifica o tipo de dado a ser rolado
 	dice = defineDice(arr, arr.indexOf('d'));
+	console.log(dice);
 
 	// rola os dados de acordo com quantidade e tipo
 	rolls = randomize(quantity, dice);
@@ -87,7 +111,7 @@ function defineQuantity(args, dIndex) {
 function defineDice(args, dIndex) {
 	let result = new String();
 	// une  as strings de cada posição do array em uma única string
-	for (let i = dIndex + 1; i < args.length; i++) {
+	for (let i = dIndex+1; i < args.length; i++) {
 		result += args[i];
 	}
 	// converte a string para integer

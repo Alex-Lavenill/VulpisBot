@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-require('discord-reply');
 
 app.get("/", (request, response) => {
 	const ping = new Date(new Date().toUTCString())
