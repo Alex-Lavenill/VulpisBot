@@ -4,9 +4,17 @@ const Discord = require("discord.js");
 module.exports.run = async (client, message, args) => {	
 	let embed = new Discord.MessageEmbed().setDescription(
 		`**$say** <frase>
-		 > O bot repete a frase
-		 **$roll** <x>d<y>
-		 > Ele rola um dado. x = quantidade; y = tipo de dado.
+		> Repete a frase escrita após o comando. Deleta a mensagem de comando.
+		**$roll** <x>d<y>
+		> Rola dados. Onde X é a quantidade de dados a ser rolada e Y o tipo/maior número do dado.
+		**$calc** <calculo>
+		> Resolve cálculos matemáticos.
+		> __Operadores:__
+		> \` + \` Adição
+		> \` - \` Subtração
+		> \` / \` Divisão
+		> \` * \` Múltiplicação
+		> \` ^ \` Potenciação
 		`);
 		
 	message.channel.send(embed);
