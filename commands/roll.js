@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
+	if (!args[0]) return message.lineReply('**Comando vazio.** Em caso de dúvida use ` $help. `');
 	let quantity;
 	let embed;
 	let rolls;

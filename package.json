@@ -12,6 +12,7 @@
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
     "discord-api-types": "^0.26.1",
+    "discord-inline-reply": "^1.0.3",
     "discord-reply": "^0.1.2",
     "discord.js": "^12.5.3",
     "eval": "^0.1.6",

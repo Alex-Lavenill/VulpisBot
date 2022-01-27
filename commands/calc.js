@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 
 // recebe uma formula matemática e usa eval() para resolvê-la
 module.exports.run = async (client, message, args) => {
+	if (!args[0]) return message.lineReply('**Comando vazio.** Em caso de dúvida use ` $help. `');
 	let formula = args[0];
 	let result;
 

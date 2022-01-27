@@ -19,6 +19,7 @@ module.exports.run = async (client, message, args) => {
 			> \` * \` Múltiplicação
 			> \` ^ \` Potenciação
 		`)
-		.addField('GitHub', 'https://github.com/Alex-Lavenill/VulpisBot')
+		.addField('Quer ver o projeto? GitHub:', 'https://github.com/Alex-Lavenill/VulpisBot')
+		.setFooter('Author: Lavenill Alex#0106');
 	message.channel.send(embed);
 }
