@@ -5,6 +5,8 @@ const mySecret = process.env['TOKEN']; // Acessando o token do bot
 require('discord-inline-reply');
 const express = require('express');
 const app = express();
+// const db = require('./database/db');
+// const register = require('./database/registration/phrase');
 
 // Recebe o ping
 app.get("/", (request, response) => {
@@ -43,7 +45,7 @@ client.on('guildDelete', () => {
 
 // Captura mensagem e verifica comando
 client.on("message", async message => {
-	if (message.author.bot) return;
+	// if (message.author.bot) return;
 	if (message.channel.type == "dm") return; // Não responde mensagem direta
 	if (!message.content.toLowerCase().startsWith(config.prefix)) return;
 	if (message.content.startsWith('<@!${client.user.id}>') || message.content.startsWith('<@{client.user.id>')) return;

@@ -1,0 +1,12 @@
+const db = require('../db');
+
+const Table = db.sequelize.define('table',{
+  field: {
+    type: db.Sequelize.STRING
+  }
+})
+
+/* Cria a tabela: */
+// Table.sync()
+
+module.exports = Table

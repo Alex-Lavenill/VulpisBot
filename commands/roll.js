@@ -11,35 +11,18 @@ module.exports.run = async (client, message, args) => {
 	let arr = Array.from(args.shift());
 	let phrase = args.join(" ");
 
-	
-	
-	
-	
-	// identifica soma
-
-
-
-
+	// Captura soma
 	console.log('arr ', arr);
 	if (arr.includes('+')) {
-		let plus = arr.slice(-( arr.length - arr.indexOf('+') )-1);
-		// plus = plus.shift();
-		console.log(plus);
+		var plus = arr.slice(-( arr.length - arr.indexOf('+') )+1);
+		plus = parseInt(plus.join(''));
 	}
-	console.log('arr ', arr);
-
-
-
-
-
-
 
 	// identifica a quantidade de rolagens a ser feita
 	quantity = defineQuantity(arr, arr.indexOf('d'));
 
 	// identifica o tipo de dado a ser rolado
 	dice = defineDice(arr, arr.indexOf('d'));
-	console.log(dice);
 
 	// rola os dados de acordo com quantidade e tipo
 	rolls = randomize(quantity, dice);
@@ -58,9 +41,9 @@ module.exports.run = async (client, message, args) => {
 
 	//cria a embed que exibe as informações
 	if (rolls.length == 0) {
-		embed = configUnicEmbed(best, arr, phrase);
+		embed = configUnicEmbed(best, arr, plus, phrase);
 	} else {
-		embed = configMultEmbed(rolls, best, total, arr, phrase);
+		embed = configMultEmbed(rolls, best, total, arr, plus, phrase);
 	}
 
 	// envia a embed como mensagem
@@ -70,24 +53,43 @@ module.exports.run = async (client, message, args) => {
 /* =-=-= FUNCTIONS =-=-= */
 
 // cria uma embed que exibir um único valor
-function configUnicEmbed(value, dice, title = '') {
+function configUnicEmbed(value, dice, plus = 0, title = '') {
+	let fieldText = {
+		name: `${dice.join('').toLowerCase()} Result: `, 
+		value: `[${value}]` 
+	};
+
+	if (plus > 0) {
+		fieldText = {
+			 name: `${dice.join('').toLowerCase()} Result: `, 
+			 value: `[${value}]+${plus} => ${value+plus}` 
+		};
+	}
+
 	return new Discord.MessageEmbed()
 		.setColor('#9B59B6')
 		.setTitle(title)
-		.addField(
-			`${dice.join('').toLowerCase()} Result: `,
-			`[${value}]`);
+		.addFields(fieldText);
 }
 
 // cria uma embed que exibe multiplos valores
-function configMultEmbed(arr, value, total, dice, title = '') {
-		return new Discord.MessageEmbed()
-			.setColor('#9B59B6')
-			.setTitle(title)
-			.addField(
-				`${dice.join('').toLowerCase()} Result: `, 
-				`[**${value}**, ${arr.join(", ")}] => ${total}`
-			);
+function configMultEmbed(arr, value, total, dice, plus = 0, title = '') {
+	let fieldText = {
+		name: `${dice.join('').toLowerCase()} Result: `, 
+		value: `[**${value}**, ${arr.join(", ")}] => ${total}`
+	};
+
+	if (plus > 0) {
+		fieldText = {
+			name: `${dice.join('').toLowerCase()} Result: `, 
+			value: `[**${value}**, ${arr.join(", ")}]+${plus} => ${total+plus}`
+		};
+	}
+
+	return new Discord.MessageEmbed()
+		.setColor('#9B59B6')
+		.setTitle(title)
+		.addFields(fieldText);
 }
 
 // captura a quantidade de rolagens

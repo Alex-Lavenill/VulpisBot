@@ -1,0 +1,15 @@
+const db = require('../db');
+const Table = require('../models/table');
+
+let content;
+
+Table.create({
+	field: content
+}).then(() =>{
+	console.log(`${p} cadastrado.`);
+}).catch((erro) =>{
+	console.log('Erro: Conteúdo ão cadastrada. ERRO: '+ erro);
+})
+
+db.sequelize.sync();
+db.sequelize.sync({force:true});
